@@ -5,16 +5,25 @@ import { Input } from "components/input";
 import { Label } from "components/label";
 import LayoutAuthentication from "layout/LayoutAuthentication";
 import FormGroup from "components/common/FormGroup";
+import { Button } from "components/button";
+import { Checkbox } from "components/checkbox";
+import { useState } from "react";
 
 const SingUpPage = () => {
   const {
     handleSubmit,
     control,
-    formState: { isValid, isSubmitting },
+    // formState: { isValid, isSubmitting },
   } = useForm({
     mode: "onChange",
   });
-  const handleSignUp = (values) => {};
+  const handleSignUp = (values) => {
+    console.log(values);
+  };
+  const [acceptTerm, setAcceptTerm] = useState(false);
+  const handleToggleTerm = () => {
+    setAcceptTerm(!acceptTerm);
+  };
   return (
     <LayoutAuthentication heading="SignUp">
       <p className="mb-6 text-xs font-normal text-center lg:text-sm text-text3 lg:mb-8">
@@ -51,25 +60,29 @@ const SingUpPage = () => {
           <Label htmlFor="password">Password *</Label>
           <Input
             name="password"
+            type="password"
             control={control}
             placeholder="Create a password"
           ></Input>
         </FormGroup>
         <div className="flex items-start mb-5 gap-x-5">
-          <span className="inline-block w-5 h-5 border rounded border-text4"></span>
-          <p className="flex-1 text-sm text-text2">
-            I agree to the{" "}
-            <span className="underline cursor-pointer text-secondary">
-              Terms of Use
-            </span>{" "}
-            and have read and understand the{" "}
-            <span className="underline cursor-pointer text-secondary">
-              Privacy policy
-            </span>
-            .
-          </p>
+          <Checkbox name="term" checked={acceptTerm} onClick={handleToggleTerm}>
+            <p className="flex-1 text-sm text-text2">
+              I agree to the{" "}
+              <span className="underline cursor-pointer text-secondary">
+                Terms of Use
+              </span>{" "}
+              and have read and understand the{" "}
+              <span className="underline cursor-pointer text-secondary">
+                Privacy policy
+              </span>
+              .
+            </p>
+          </Checkbox>
         </div>
-        
+        <Button type="submit" className="bg-primary text-white w-full">
+          Create my account
+        </Button>
       </form>
     </LayoutAuthentication>
   );
