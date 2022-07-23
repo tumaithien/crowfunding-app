@@ -40,29 +40,31 @@ const sidebarMenu = [
   {
     icon: <IconLogout></IconLogout>,
     title: "Logout",
-    url: "#",
+    url: "/logout",
     onClick: () => {},
   },
   {
     icon: <IconDarkmode></IconDarkmode>,
     title: "Light/Dark",
-    url: "#",
+    url: "/light",
     onClick: () => {},
   },
 ];
 
 const DashboardSidebar = () => {
+  const navlinkClass =
+    "flex items-center gap-x-5 md:w-12 md:h-12 md:rounded-lg md:justify-center md:mb-8 last:mb-auto last:bg-white last:shadow-sdprimary";
   return (
     <div className="w-full h-full flex-shrink-0 max-h-[733px] flex flex-col md:w-[76px] rounded-3xl bg-white shadow-[10px_10px_20px_rgba(218,_213,_213,_0.15)] py-10 px-[14px]">
       {sidebarMenu.map((item) => (
         <NavLink
           to={item.url}
           key={item.title}
-          className={classNames(
-            "flex items-center text-iconColor gap-x-5 md:w-12 md:h-12 md:rounded-lg md:justify-center md:mb-8 last:mb-auto last:bg-white last:shadow-sdprimary",
-            ({ isActive }) =>
-              isActive ? "bg-primary text-primary bg-opacity-20" : ""
-          )}
+          className={({ isActive }) =>
+            isActive
+              ? `${navlinkClass} bg-primary text-primary bg-opacity-20`
+              : `${navlinkClass} text-iconColor`
+          }
         >
           <span>{item.icon}</span>
           <span className="md:hidden">{item.title}</span>
