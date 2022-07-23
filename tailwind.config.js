@@ -25,8 +25,11 @@ module.exports = {
         softDark: "#22222C",
         darkSoft: "#24242C",
         darkStroke: "#3A3A43",
-        darkRed: "#422C32"
-      }
+        darkRed: "#422C32",
+      },
+      boxShadow: {
+        sdprimary: "10px 10px 20px rgba(211, 211, 211, 0.25)",
+      },
     },
   },
   plugins: [],
