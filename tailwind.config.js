@@ -13,7 +13,7 @@ module.exports = {
         text2: "#4B5264",
         text3: "#808191",
         text4: "#B2B3BD",
-        "icon-color": "#A2A2A8",
+        iconColor: "#A2A2A8",
         white: "#FFFFFF",
         whiteSoft: "#FCFBFF",
         graySoft: "#FCFCFC",
