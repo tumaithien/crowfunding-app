@@ -1,3 +1,4 @@
+import StartCampaignPage from "pages/StartCampaignPage";
 import React, { lazy } from "react";
 import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -18,6 +19,10 @@ function App() {
           <Route
             path="/campaign"
             element={<CampaignPage></CampaignPage>}
+          ></Route>
+          <Route
+            path="/campaign-start"
+            element={<StartCampaignPage></StartCampaignPage>}
           ></Route>
         </Route>
       </Routes>

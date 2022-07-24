@@ -80,7 +80,7 @@ const SignInPage = () => {
             Forgot password
           </Link>
         </div>
-        <Button type="submit" className="bg-primary text-white w-full">
+        <Button type="submit" kind="primary" className="w-full">
           Sign in
         </Button>
       </form>
