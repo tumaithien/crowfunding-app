@@ -1,11 +1,18 @@
 import Heading from "components/common/Heading";
 import CampaignGrid from "modules/campaign/CampaignGrid";
 import CampaignFeature from "modules/campaign/CampaignFeature";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "components/button";
+import { useDispatch, useSelector } from "react-redux";
+import { getCampaign } from "store/campaign/slice";
 
 const CampaignPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCampaign());
+  }, [dispatch]);
+  const { campaignData } = useSelector((state) => state.campaign);
   return (
     <div>
       <Heading number={4}>Your Campaign</Heading>
@@ -47,9 +54,10 @@ const CampaignPage = () => {
         </Button>
       </div>
       <CampaignGrid type="secondary">
-        <CampaignFeature></CampaignFeature>
-        <CampaignFeature></CampaignFeature>
-        <CampaignFeature></CampaignFeature>
+        {campaignData.length > 0 &&
+          campaignData.map((data) => (
+            <CampaignFeature data={data} key={data.id}></CampaignFeature>
+          ))}
       </CampaignGrid>
       <div className="mt-10">
         <Button type="button" className="mx-auto px-14" kind="ghost">

@@ -2,7 +2,7 @@ import React from "react";
 
 const Search = ({ placeholder, ...props }) => {
   return (
-    <div className="p-2">
+    <div className="p-2 sticky top-0 bg-white">
       <input
         type="text"
         placeholder={placeholder}

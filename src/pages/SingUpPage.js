@@ -11,11 +11,13 @@ import { Input } from "components/input";
 import { IconEyeToggle } from "components/icons";
 import { Checkbox } from "components/checkbox";
 import { Button, ButtonGoogle } from "components/button";
+import { useDispatch } from "react-redux";
+import { authRegister } from "store/auth/auth-slice";
 
 const schema = yup
   .object()
   .shape({
-    fullname: yup.string().required("This field is required"),
+    name: yup.string().required("This field is required"),
     email: yup
       .string()
       .email("Invalid email address")
@@ -31,13 +33,20 @@ const SingUpPage = () => {
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  const handleSignUp = (values) => {
-    console.log(values);
+  const dispatch = useDispatch();
+  const handleSignUp = async (values) => {
+    try {
+      dispatch(authRegister(values));
+      reset({});
+    } catch (error) {
+      console.log(error);
+    }
   };
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
     useToggleValue();
@@ -47,8 +56,8 @@ const SingUpPage = () => {
     <LayoutAuthentication heading="SignUp">
       <p className="mb-6 text-xs font-normal text-center lg:text-sm text-text3 lg:mb-8">
         Already have an account?{" "}
-        <Link to="/sign-in" className="font-medium underline text-primary">
-          Sign in
+        <Link to="/login" className="font-medium underline text-primary">
+          Login
         </Link>
       </p>
       <ButtonGoogle text="Sign up with Google"></ButtonGoogle>
@@ -57,12 +66,12 @@ const SingUpPage = () => {
       </p>
       <form onSubmit={handleSubmit(handleSignUp)} autoComplete="off">
         <FormGroup>
-          <Label htmlFor="fullname">Full Name *</Label>
+          <Label htmlFor="name">Full Name *</Label>
           <Input
-            name="fullname"
+            name="name"
             control={control}
             placeholder="John Doe"
-            error={errors.fullname?.message}
+            error={errors.name?.message}
           ></Input>
         </FormGroup>
         <FormGroup>

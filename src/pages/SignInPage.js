@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import LayoutAuthentication from "layout/LayoutAuthentication";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,6 +10,8 @@ import { Input } from "components/input";
 import { IconEyeToggle } from "components/icons";
 import useToggleValue from "hooks/useToggleValue";
 import { Button, ButtonGoogle } from "components/button";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin } from "store/auth/auth-slice";
 
 const schema = yup
   .object()
@@ -35,15 +37,24 @@ const SignInPage = () => {
   });
   const { value: showPassword, handleToggleValue: handleTogglePassword } =
     useToggleValue();
+  const dispatch = useDispatch();
   const handleSignIn = (values) => {
-    console.log(values);
+    dispatch(authLogin(values));
   };
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user && user.id) {
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   return (
     <LayoutAuthentication heading="Welcome Back!">
       <p className="mb-6 text-xs font-normal text-center lg:text-sm text-text3 lg:mb-8">
         Dont have an account?{" "}
-        <Link to="/sign-up" className="font-medium underline text-primary">
-          Sign up
+        <Link to="/register" className="font-medium underline text-primary">
+          Register
         </Link>
       </p>
       <ButtonGoogle text="Sign in with Google"></ButtonGoogle>

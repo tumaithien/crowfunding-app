@@ -9,6 +9,7 @@ const Input = ({
   name = "",
   type = "text",
   className = "",
+  classWrapper = "",
   error = "",
   placeholder = "",
   children,
@@ -21,7 +22,7 @@ const Input = ({
     defaultValue: "",
   });
   return (
-    <div className="relative pb-6">
+    <div className={classNames("relative pb-6", classWrapper)}>
       <input
         type={type}
         className={classNames(

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "styles/mixin";
 @layer base {
   body {
     @apply font-primary text-base font-normal mx-auto;
@@ -16,6 +17,7 @@
   border: 1px solid #f1f1f3;
   border-radius: 10px;
   padding: 10px 25px;
+
   @apply flex flex-col items-center;
   .ql-toolbar.ql-snow {
     border: none;
@@ -25,6 +27,7 @@
 .ql-container.ql-snow,
 .ql-editor {
   width: 100%;
+  min-height: 400px;
   @apply border-none font-primary text-sm;
 }
 .ql-editor {
@@ -32,4 +35,135 @@
 }
 .ql-editor.ql-blank::before {
   @apply text-sm not-italic text-text4;
+}
+.shadow-1 {
+  box-shadow: -4px 4px 8px rgba(226, 226, 226, 0.2),
+    4px 4px 8px rgba(226, 226, 226, 0.2);
+}
+.gradient-banner {
+  background: linear-gradient(
+      179.14deg,
+      rgba(32, 18, 63, 0) -7.14%,
+      rgba(0, 0, 0, 0.4) 87.01%
+    ),
+    url("../public/placeholder.png");
+}
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+.scroll-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+//custom date picker
+body .react-date-picker {
+  @apply px-6 py-4 border w-full text-text1 bg-transparent placeholder:text-text4 dark:placeholder:text-text2 border-strock dark:border-darkStroke dark:text-white rounded-xl text-sm border-strock;
+  height: 54px;
+  .react-date-picker__wrapper {
+    @apply border-none items-center font-medium;
+  }
+  .react-date-picker__clear-button {
+    @apply hidden;
+  }
+  .react-date-picker__calendar-button {
+    padding: 0;
+  }
+}
+body {
+  .react-calendar {
+    @apply border-none shadow rounded-xl;
+  }
+  .react-calendar__navigation button:enabled:hover,
+  .react-calendar__navigation button:enabled:focus {
+    @apply bg-transparent;
+  }
+  .react-calendar__tile:not(.react-calendar__tile--active, .react-calendar__tile--now):enabled:hover,
+  .react-calendar__tile:not(.react-calendar__tile--active, .react-calendar__tile--now):enabled:focus {
+    @apply bg-transparent text-primary;
+  }
+  .react-calendar__tile--active:enabled:hover,
+  .react-calendar__tile--active:enabled:focus,
+  .react-calendar__tile--active {
+    @apply bg-primary text-white rounded-lg;
+  }
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus,
+  .react-calendar__tile--now,
+  .react-calendar__tile--now:hover {
+    @apply bg-secondary text-white rounded-lg;
+  }
+}
+//CSS post details
+.entry-content {
+  font-family: "Epilogue", sans-serif;
+  font-size: 16px;
+  h2,
+  h3,
+  h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 26px;
+  }
+  h4 {
+    font-size: 22px;
+  }
+  p {
+    margin-bottom: 20px;
+    line-height: 2;
+    font-size: 16px;
+  }
+  figure {
+    margin-bottom: 20px;
+  }
+  figure img {
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  figcaption {
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    color: #6b6b6b;
+  }
+  img {
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  ul {
+    list-style-type: disc;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ul,
+  ol {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    li {
+      margin-bottom: 10px;
+    }
+  }
+  @media screen and (max-width: 1023.98px) {
+    font-size: 14px;
+    h2 {
+      font-size: 26px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 20px;
+    }
+  }
+}
+.title-clip-2 {
+  @include textClamp(2);
 }

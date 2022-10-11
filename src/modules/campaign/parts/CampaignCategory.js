@@ -3,7 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classNames from "utils/classNames";
 
-const CampaignCategory = ({ text = "Education", className = "text-xs mb-4" }) => {
+const CampaignCategory = ({
+  text = "Education",
+  className = "text-xs mb-4",
+}) => {
   return (
     <Link
       to="/"
@@ -15,7 +18,7 @@ const CampaignCategory = ({ text = "Education", className = "text-xs mb-4" }) =>
       <span className="inline-block">
         <IconFolder></IconFolder>
       </span>
-      <span>{text}</span>
+      <span className="capitalize">{text}</span>
     </Link>
   );
 };

@@ -8,8 +8,10 @@ import {
 } from "components/icons";
 import IconCampaign from "components/icons/IconCampaign";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import classNames from "utils/classNames";
+import { authLogout } from "store/auth/auth-slice";
+import { logOut } from "utils/auth";
 
 const sidebarMenu = [
   {
@@ -41,7 +43,6 @@ const sidebarMenu = [
     icon: <IconLogout></IconLogout>,
     title: "Logout",
     url: "/logout",
-    onClick: () => {},
   },
   {
     icon: <IconDarkmode></IconDarkmode>,
@@ -54,22 +55,39 @@ const sidebarMenu = [
 const DashboardSidebar = () => {
   const navlinkClass =
     "flex items-center gap-x-5 md:w-12 md:h-12 md:rounded-lg md:justify-center md:mb-8 last:mb-auto last:bg-white last:shadow-sdprimary";
+  const dispatch = useDispatch();
   return (
     <div className="w-full h-full flex-shrink-0 max-h-[733px] flex flex-col md:w-[76px] rounded-3xl bg-white shadow-[10px_10px_20px_rgba(218,_213,_213,_0.15)] py-10 px-[14px]">
-      {sidebarMenu.map((item) => (
-        <NavLink
-          to={item.url}
-          key={item.title}
-          className={({ isActive }) =>
-            isActive
-              ? `${navlinkClass} bg-primary text-primary bg-opacity-20`
-              : `${navlinkClass} text-iconColor`
-          }
-        >
-          <span>{item.icon}</span>
-          <span className="md:hidden">{item.title}</span>
-        </NavLink>
-      ))}
+      {sidebarMenu.map((item) => {
+        if (item.url === "/logout") {
+          return (
+            <button
+              key={item.url}
+              onClick={() => {
+                dispatch(authLogout());
+              }}
+              className={`${navlinkClass} text-iconColor`}
+            >
+              <span>{item.icon}</span>
+              <span className="md:hidden">{item.title}</span>
+            </button>
+          );
+        }
+        return (
+          <NavLink
+            to={item.url}
+            key={item.title}
+            className={({ isActive }) =>
+              isActive
+                ? `${navlinkClass} bg-primary text-primary bg-opacity-20`
+                : `${navlinkClass} text-iconColor`
+            }
+          >
+            <span>{item.icon}</span>
+            <span className="md:hidden">{item.title}</span>
+          </NavLink>
+        );
+      })}
     </div>
   );
 };
